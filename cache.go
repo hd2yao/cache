@@ -31,13 +31,13 @@ func newSafeCache(cache Cache) *safeCache {
     }
 }
 
-func (sc *safeCache) Set(key string, value interface{}) {
+func (sc *safeCache) set(key string, value interface{}) {
     sc.m.Lock()
     defer sc.m.Unlock()
     sc.cache.Set(key, value)
 }
 
-func (sc *safeCache) Get(key string) interface{} {
+func (sc *safeCache) get(key string) interface{} {
     sc.m.Lock()
     defer sc.m.Unlock()
     sc.nget++

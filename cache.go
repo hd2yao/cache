@@ -22,7 +22,7 @@ type safeCache struct {
     m     sync.RWMutex
     cache Cache
 
-    nhit, nget int
+    nhit, nget int // nhit 缓存命中次数，nget 缓存获取次数
 }
 
 func newSafeCache(cache Cache) *safeCache {
@@ -54,6 +54,7 @@ func (sc *safeCache) Get(key string) interface{} {
     return v
 }
 
+// 查看统计次数
 func (sc *safeCache) stat() *Stat {
     sc.m.RLock()
     defer sc.m.RUnlock()
